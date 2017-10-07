@@ -16,7 +16,6 @@ int main()
     std::cout << "Waiting for the game to launch..." << std::endl;
 
     auto handle = Process::GetHandle(TARGET_FILENAME, "Steam", PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_QUERY_INFORMATION);
-    auto baseAddress = (char*)Process::FindBaseAddress(handle, TARGET_FILENAME);
 
     std::cout << std::endl;
     std::cout << "Wait for the main menu and press enter." << std::endl;
@@ -34,8 +33,8 @@ int main()
         (
             data.data(),
             data.size(),
-            "\x04\x00\x00\x00\x04\x00\x00\x00\x8c\x02\x00\x00\x00\x00\x00\x00\x07\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x08\x01",
-            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx????xxxxxx",
+            "\x04\x00\x00\x00\x04\x00\x00\x00\x8c\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01",
+            "xxxxxxxxxxxxxxxx?xxxxxxxxxxxxxxx????xxxx?x",
             offset
         ))
         {
