@@ -25,6 +25,8 @@ int main()
 
     std::cout << "Scanning..." << std::endl;
 
+    bool patternFound = false;
+
     Process::IterateMemory(handle, [&](void* ptr, const std::vector<char>& data)
     {
         uint64_t offset;
@@ -32,11 +34,13 @@ int main()
         (
             data.data(),
             data.size(),
-            "\x04\x00\x00\x00\x04\x00\x00\x00\x8c\x02\x00\x00\x00\x00\x00\x00\x07\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x08\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00",
-            "xxxxxxxxxxxxxxxxxxxxxxxxxxxx????????xxxxxxxxxxxxxxxxxxxxxx",
+            "\x04\x00\x00\x00\x04\x00\x00\x00\x8c\x02\x00\x00\x00\x00\x00\x00\x07\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x08\x01",
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx????xxxxxx",
             offset
         ))
         {
+            patternFound = true;
+
             auto address = (char*)ptr + offset;
             std::cout << "Pattern found @ " << (void*)address << ", offset: " << offset << std::endl;
 
@@ -51,11 +55,21 @@ int main()
                 std::cout << "Value written! Enjoy." << std::endl;
             }
 
+            std::cout << "Press enter to quit." << std::endl;
+            std::cin.get();
+
             return true;
         }
 
         return true;
     });
+
+    if (!patternFound)
+    {
+        std::cout << "Failed to find pattern match. Maybe the game got updated?" << std::endl;
+        std::cout << "Press enter to quit." << std::endl;
+        std::cin.get();
+    }
 
     return 0;
 }
