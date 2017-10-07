@@ -1,0 +1,9 @@
+*.VC.db
+*.opendb
+.vs/
+Debug/
+Release/
+*.pdb
+*.ipdb
+*.iobj
+*.exe
