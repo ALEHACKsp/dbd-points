@@ -34,7 +34,7 @@ int main()
             data.data(),
             data.size(),
             "\x04\x00\x00\x00\x04\x00\x00\x00\x8c\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01",
-            "xxxxxxxxxxxxxxxx?xxxxxxxxxxxxxxx????xxxx?x",
+            "xxxxxxxxxxxxxxxx?xx?xxxxxxxxxxxx????xxxx?x",
             offset
         ))
         {
